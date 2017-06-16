@@ -25,14 +25,14 @@ class LearningAgent(Agent):
         ###########
         # Set any additional class parameters as needed
         self.first = True
-        self.count = 1
+        self.count = 0
 
     def decay_function(self):
         if self.first:
             self.first = False
             return 1.0
         self.count += 1
-        return math.pow(0.9,self.count)
+        return 1-(0.0064*self.count)
 
     def reset(self, destination=None, testing=False):
         """ The reset function is called at the beginning of each trial.
@@ -223,7 +223,7 @@ def run():
     # Flags:
     #   tolerance  - epsilon tolerance before beginning testing, default is 0.05 
     #   n_test     - discrete number of testing trials to perform, default is 0
-    sim.run(n_test=10, tolerance=0.02)
+    sim.run(n_test=10, tolerance=0.2)
 
 
 if __name__ == '__main__':
